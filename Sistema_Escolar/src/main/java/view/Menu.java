@@ -8,9 +8,8 @@ import com.mycompany.sistema_escolar.Sistema_Escolar;
 
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
+    public static int selecao;
+    
     public Menu() {
         initComponents();
     }
@@ -110,15 +109,14 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAdiministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdiministradorActionPerformed
-        int selecao = 0;
+        selecao = 0;
         Login login = new Login();
         login.setVisible(true);
-        Menu menu = new Menu();
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAdiministradorActionPerformed
 
     private void jButtonAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoActionPerformed
-        int selecao = 1;
+        selecao = 2;
         Login login = new Login();
         login.setVisible(true);
         Menu menu = new Menu();
@@ -126,7 +124,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAlunoActionPerformed
 
     private void jButtonProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessorActionPerformed
-        int selecao = 2;
+        selecao = 1;
         Login login = new Login();
         login.setVisible(true);
         Menu menu = new Menu();

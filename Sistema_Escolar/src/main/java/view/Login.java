@@ -3,16 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
+import view.Menu;
+import view.Login;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author aluno.saolucas
- */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+    
     public Login() {
         initComponents();
     }
@@ -91,8 +88,8 @@ public class Login extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -118,15 +115,32 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        // TODO add your handling code here:
+        String email = jTextFieldEmail.getText();
+        String senha = jTextFieldSenha.getText();
+        
+        if(email.isEmpty() || senha.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Email ou senha não preenchidos!");
+        }else if(Menu.selecao == 0){
+            Adiministrador administrador = new Adiministrador();
+            administrador.setVisible(true);
+            this.setVisible(false);
+        }else if(Menu.selecao == 1){
+            Professor professor = new Professor();
+            professor.setVisible(true);
+            this.setVisible(false);
+        }else{
+            Aluno aluno = new Aluno();
+            aluno.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
-        // TODO add your handling code here:
+        String email = jTextFieldEmail.getText();
     }//GEN-LAST:event_jTextFieldEmailActionPerformed
 
     private void jTextFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSenhaActionPerformed
-        // TODO add your handling code here:
+        String senha = jTextFieldSenha.getText();
     }//GEN-LAST:event_jTextFieldSenhaActionPerformed
 
     /**
