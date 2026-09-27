@@ -4,7 +4,9 @@
  */
 package view;
 import view.Login;
-import com.mycompany.sistema_escolar.Sistema_Escolar;
+import dao.AdministradorDao;
+import dao.ProfessorDao;
+import dao.AlunoDao;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -44,14 +46,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        jButtonProfessor.setText("Professor");
+        jButtonProfessor.setText("     Professor    ");
         jButtonProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProfessorActionPerformed(evt);
             }
         });
 
-        jButtonAluno.setText("Aluno");
+        jButtonAluno.setText("        Aluno       ");
         jButtonAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAlunoActionPerformed(evt);
@@ -109,25 +111,42 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAdiministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdiministradorActionPerformed
-        selecao = 0;
-        Login login = new Login();
-        login.setVisible(true);
+        selecao = 1;
+
+        if (!AdministradorDao.existeAdministrador()) {
+            CadastrarAdministrador cadastro = new CadastrarAdministrador();
+            cadastro.setVisible(true);
+        } else {
+            Login login = new Login();
+            login.setVisible(true);
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAdiministradorActionPerformed
 
     private void jButtonAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlunoActionPerformed
-        selecao = 2;
+        selecao = 3;
+
+        if (!AlunoDao.existeAluno()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Nenhum Aluno cadastrado.");
+            return;
+        }
+
         Login login = new Login();
         login.setVisible(true);
-        Menu menu = new Menu();
         this.setVisible(false);
     }//GEN-LAST:event_jButtonAlunoActionPerformed
 
     private void jButtonProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfessorActionPerformed
-        selecao = 1;
+        selecao = 2;
+
+        if (!ProfessorDao.existeProfessor()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Nenhum Professor cadastrado.");
+            return;
+        }
+
         Login login = new Login();
         login.setVisible(true);
-        Menu menu = new Menu();
         this.setVisible(false);
     }//GEN-LAST:event_jButtonProfessorActionPerformed
 

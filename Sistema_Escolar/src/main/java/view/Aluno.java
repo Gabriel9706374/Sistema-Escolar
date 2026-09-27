@@ -4,6 +4,9 @@
  */
 package view;
 
+import dao.ConsultaDao;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aluno.saolucas
@@ -17,6 +20,7 @@ public class Aluno extends javax.swing.JFrame {
      */
     public Aluno() {
         initComponents();
+        carregarTabela();
     }
 
     /**
@@ -94,6 +98,15 @@ public class Aluno extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void carregarTabela() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        modelo.setRowCount(0);
+        for (Object[] linha : ConsultaDao.notasAluno(Login.email_logado)) {
+            modelo.addRow(linha);
+        }
+    }
 
     private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
         Menu menu = new Menu();

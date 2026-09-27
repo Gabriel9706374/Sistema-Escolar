@@ -6,8 +6,13 @@ package view;
 import view.Menu;
 import view.Login;
 import javax.swing.JOptionPane;
+import dao.AdministradorDao;
+import dao.ProfessorDao;
+import dao.AlunoDao;
 
 public class Login extends javax.swing.JFrame {
+
+    public static String email_logado = "";
 
     
     public Login() {
@@ -120,19 +125,41 @@ public class Login extends javax.swing.JFrame {
         
         if(email.isEmpty() || senha.isEmpty()){
             JOptionPane.showMessageDialog(this, "Email ou senha não preenchidos!");
-        }else if(Menu.selecao == 0){
+            return;
+        }
+
+        boolean acesso = false;
+
+        if (Menu.selecao == 1) {
+            acesso = AdministradorDao.autenticar(email, senha);
+        } else if (Menu.selecao == 2) {
+            acesso = ProfessorDao.autenticar(email, senha);
+        } else if (Menu.selecao == 3) {
+            acesso = AlunoDao.autenticar(email, senha);
+        } else {
+            JOptionPane.showMessageDialog(this, "Tipo de acesso inválido!");
+            return;
+        }
+
+        if (!acesso) {
+            JOptionPane.showMessageDialog(this, "Email ou senha incorretos!");
+            return;
+        }
+
+        email_logado = email;
+
+        if (Menu.selecao == 1) {
             Adiministrador administrador = new Adiministrador();
             administrador.setVisible(true);
-            this.setVisible(false);
-        }else if(Menu.selecao == 1){
+        } else if (Menu.selecao == 2) {
             Professor professor = new Professor();
             professor.setVisible(true);
-            this.setVisible(false);
-        }else{
+        } else if (Menu.selecao == 3) {
             Aluno aluno = new Aluno();
             aluno.setVisible(true);
-            this.setVisible(false);
         }
+
+        this.setVisible(false);
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jTextFieldEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEmailActionPerformed
