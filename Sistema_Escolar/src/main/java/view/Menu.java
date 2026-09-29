@@ -38,7 +38,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLabel2.setText("Entrar como:");
 
-        jButtonAdiministrador.setText("Adiministrador");
+        jButtonAdiministrador.setText("Administrador");
         jButtonAdiministrador.setToolTipText("");
         jButtonAdiministrador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

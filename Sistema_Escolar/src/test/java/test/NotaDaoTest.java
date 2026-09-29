@@ -31,17 +31,20 @@ public class NotaDaoTest {
         assertTrue(AcademicoDao.cadastrarDisciplina("Matematica"));
         assertTrue(AcademicoDao.cadastrarTurma("Turma A", 2026));
 
-        assertTrue(AcademicoDao.relacionar(
-                "Carlos",
-                "Joao",
-                "Matematica",
-                "Turma A"
-        ));
+        int professorId = AcademicoDao.listarProfessores().get(0).getId();
+        int alunoId = AcademicoDao.listarAlunos().get(0).getId();
+        int disciplinaId = AcademicoDao.listarDisciplinas().get(0).getId();
+        int turmaId = AcademicoDao.listarTurmas().get(0).getId();
+
+        assertTrue(AcademicoDao.adicionarProfessorDisciplina(professorId, disciplinaId));
+        assertTrue(AcademicoDao.adicionarProfessorTurma(professorId, turmaId));
+        assertTrue(AcademicoDao.adicionarAlunoTurma(alunoId, turmaId));
+        assertTrue(AcademicoDao.adicionarTurmaDisciplina(turmaId, disciplinaId));
     }
 
     @Test
     public void deveSalvarNotaEAprovarAluno() {
-        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", 8, 6));
+        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 8, 6));
 
         try (Connection c = conexao.conectar();
              PreparedStatement p = c.prepareStatement("SELECT nota_final,status FROM nota");
@@ -58,7 +61,7 @@ public class NotaDaoTest {
 
     @Test
     public void deveReprovarAluno() {
-        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", 5, 6));
+        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 5, 6));
 
         try (Connection c = conexao.conectar();
              PreparedStatement p = c.prepareStatement("SELECT nota_final,status FROM nota");
@@ -75,8 +78,8 @@ public class NotaDaoTest {
 
     @Test
     public void deveAtualizarNotaExistente() {
-        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", 5, 5));
-        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", 10, 10));
+        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 5, 5));
+        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 10, 10));
 
         try (Connection c = conexao.conectar();
              PreparedStatement p = c.prepareStatement("SELECT COUNT(*),nota_final,status FROM nota");
@@ -94,17 +97,17 @@ public class NotaDaoTest {
 
     @Test
     public void naoDeveSalvarNotaAcimaDe10() {
-        assertFalse(NotaDao.salvarPorNomes("Joao", "Turma A", 11, 8));
+        assertFalse(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 11, 8));
     }
 
     @Test
     public void naoDeveSalvarNotaAbaixoDe0() {
-        assertFalse(NotaDao.salvarPorNomes("Joao", "Turma A", -1, 8));
+        assertFalse(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", -1, 8));
     }
 
     @Test
     public void deveExcluirNota() {
-        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", 8, 8));
+        assertTrue(NotaDao.salvarPorNomes("Joao", "Turma A", "Matematica", 8, 8));
 
         try (Connection c = conexao.conectar();
              PreparedStatement p = c.prepareStatement("SELECT id FROM nota");
@@ -119,4 +122,61 @@ public class NotaDaoTest {
             fail(e.getMessage());
         }
     }
+    @Test
+    public void deveAlterarNota() {
+        int professorId = AcademicoDao.listarProfessores().get(0).getId();
+        int alunoId = AcademicoDao.listarAlunos().get(0).getId();
+        int disciplinaId = AcademicoDao.listarDisciplinas().get(0).getId();
+        int turmaId = AcademicoDao.listarTurmas().get(0).getId();
+
+        assertTrue(NotaDao.salvar(professorId, alunoId, turmaId, disciplinaId, 5, 5));
+
+        try (Connection c = conexao.conectar();
+             PreparedStatement p = c.prepareStatement("SELECT id FROM nota")) {
+            try (ResultSet r = p.executeQuery()) {
+                assertTrue(r.next());
+                int id = r.getInt("id");
+                assertTrue(NotaDao.alterar(id, professorId, alunoId, turmaId, disciplinaId, 9, 8));
+            }
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+
+        try (Connection c = conexao.conectar();
+             PreparedStatement p = c.prepareStatement("SELECT nota_final,status FROM nota");
+             ResultSet r = p.executeQuery()) {
+            assertTrue(r.next());
+            assertEquals(8.5, r.getDouble("nota_final"));
+            assertEquals("APROVADO", r.getString("status"));
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void devePermitirNotasEmDisciplinasDiferentes() {
+        assertTrue(AcademicoDao.cadastrarDisciplina("Portugues"));
+        int turmaId = AcademicoDao.listarTurmas().get(0).getId();
+        int portuguesId = AcademicoDao.listarDisciplinas().stream()
+                .filter(d -> d.getMateria().equals("Portugues"))
+                .findFirst().get().getId();
+        int professorId = AcademicoDao.listarProfessores().get(0).getId();
+        int alunoId = AcademicoDao.listarAlunos().get(0).getId();
+
+        assertTrue(AcademicoDao.adicionarTurmaDisciplina(turmaId, portuguesId));
+        assertTrue(AcademicoDao.adicionarProfessorDisciplina(professorId, portuguesId));
+        assertTrue(NotaDao.salvar(professorId, alunoId, turmaId, portuguesId, 9, 9));
+
+        try (Connection c = conexao.conectar();
+             PreparedStatement p = c.prepareStatement("SELECT COUNT(*) FROM nota WHERE disciplina_id=?")) {
+            p.setInt(1, portuguesId);
+            try (ResultSet r = p.executeQuery()) {
+                assertTrue(r.next());
+                assertEquals(1, r.getInt(1));
+            }
+        } catch (Exception e) {
+            fail(e.getMessage());
+        }
+    }
+
 }

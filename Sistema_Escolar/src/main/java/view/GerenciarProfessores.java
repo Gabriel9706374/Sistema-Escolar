@@ -217,7 +217,7 @@ public class GerenciarProfessores extends JFrame {
     }
 
     private void voltar() {
-        Adiministrador administrador = new Adiministrador();
+        Administrador administrador = new Administrador();
         administrador.setVisible(true);
         this.setVisible(false);
     }

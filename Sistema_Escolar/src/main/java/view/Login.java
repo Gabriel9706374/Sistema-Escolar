@@ -6,6 +6,7 @@ package view;
 import view.Menu;
 import view.Login;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import dao.AdministradorDao;
 import dao.ProfessorDao;
 import dao.AlunoDao;
@@ -32,7 +33,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldEmail = new javax.swing.JTextField();
-        jTextFieldSenha = new javax.swing.JTextField();
+        jTextFieldSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jButtonEntrar = new javax.swing.JButton();
 
@@ -120,8 +121,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        String email = jTextFieldEmail.getText();
-        String senha = jTextFieldSenha.getText();
+        String email = jTextFieldEmail.getText().trim();
+        String senha = new String(jTextFieldSenha.getPassword());
         
         if(email.isEmpty() || senha.isEmpty()){
             JOptionPane.showMessageDialog(this, "Email ou senha não preenchidos!");
@@ -149,7 +150,7 @@ public class Login extends javax.swing.JFrame {
         email_logado = email;
 
         if (Menu.selecao == 1) {
-            Adiministrador administrador = new Adiministrador();
+            Administrador administrador = new Administrador();
             administrador.setVisible(true);
         } else if (Menu.selecao == 2) {
             Professor professor = new Professor();
@@ -167,7 +168,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldEmailActionPerformed
 
     private void jTextFieldSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSenhaActionPerformed
-        String senha = jTextFieldSenha.getText();
+        jButtonEntrarActionPerformed(evt);
     }//GEN-LAST:event_jTextFieldSenhaActionPerformed
 
     /**
@@ -212,6 +213,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldEmail;
-    private javax.swing.JTextField jTextFieldSenha;
+    private javax.swing.JPasswordField jTextFieldSenha;
     // End of variables declaration//GEN-END:variables
 }

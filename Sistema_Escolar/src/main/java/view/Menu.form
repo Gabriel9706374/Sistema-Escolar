@@ -92,7 +92,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonAdiministrador">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Adiministrador"/>
+            <Property name="text" type="java.lang.String" value="Administrador"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>

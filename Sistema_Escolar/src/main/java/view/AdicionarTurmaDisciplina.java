@@ -41,13 +41,14 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        textFieldNomeProfessor = new java.awt.TextField();
-        textFieldNomeAluno = new java.awt.TextField();
-        textFieldDisciplina = new java.awt.TextField();
-        textFieldTurma = new java.awt.TextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jTextFieldNomeProfessor = new javax.swing.JTextField();
+        jTextFieldNomeAluno = new javax.swing.JTextField();
+        jTextFieldDisciplina = new javax.swing.JTextField();
+        jTextFieldTurma = new javax.swing.JTextField();
+        jButtonVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,24 +58,12 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
 
         jLabel3.setText("Disciplina:");
 
-        jLabel4.setText("Professor:");
+        jLabel4.setText("Nome do Professor:");
 
-        jLabel5.setText("Aluno:");
+        jLabel5.setText("Nome do Aluno:");
 
-        textFieldNomeProfessor.setText("Nome do Professor");
-        textFieldNomeProfessor.addActionListener(this::textFieldNomeProfessorActionPerformed);
-
-        textFieldNomeAluno.setText("Nome do Aluno");
-        textFieldNomeAluno.addActionListener(this::textFieldNomeAlunoActionPerformed);
-
-        textFieldDisciplina.setText("Nome da Disciplina");
-        textFieldDisciplina.addActionListener(this::textFieldDisciplinaActionPerformed);
-
-        textFieldTurma.setText("Turma");
-        textFieldTurma.addActionListener(this::textFieldTurmaActionPerformed);
-
-        jButton1.setText("Adicionar");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        jButtonAdicionar.setText("Adicionar");
+        jButtonAdicionar.addActionListener(this::jButtonAdicionarActionPerformed);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +78,18 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jTextFieldNomeProfessor.setToolTipText("");
+        jTextFieldNomeProfessor.addActionListener(this::jTextFieldNomeProfessorActionPerformed);
+
+        jTextFieldNomeAluno.addActionListener(this::jTextFieldNomeAlunoActionPerformed);
+
+        jTextFieldDisciplina.addActionListener(this::jTextFieldDisciplinaActionPerformed);
+
+        jTextFieldTurma.addActionListener(this::jTextFieldTurmaActionPerformed);
+
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(this::jButtonVoltarActionPerformed);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -96,66 +97,55 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textFieldNomeAluno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textFieldDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textFieldTurma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(textFieldNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jButton1)))
-                .addGap(326, 326, 326))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButtonVoltar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonAdicionar))
+                            .addComponent(jLabel1)
+                            .addComponent(jTextFieldTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(textFieldNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(textFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(textFieldDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNomeProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextFieldDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdicionar)
+                    .addComponent(jButtonVoltar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -163,7 +153,7 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,12 +163,27 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextFieldNomeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeProfessorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeProfessorActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
-        String professor = textFieldNomeProfessor.getText().trim();
-        String aluno = textFieldNomeAluno.getText().trim();
-        String disciplina = textFieldDisciplina.getText().trim();
-        String turma = textFieldTurma.getText().trim();
+    private void jTextFieldNomeAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNomeAlunoActionPerformed
+
+    private void jTextFieldDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDisciplinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDisciplinaActionPerformed
+
+    private void jTextFieldTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTurmaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTurmaActionPerformed
+
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
+        String professor = jTextFieldNomeProfessor.getText().trim();
+        String aluno = jTextFieldNomeAluno.getText().trim();
+        String disciplina = jTextFieldDisciplina.getText().trim();
+        String turma = jTextFieldTurma.getText().trim();
 
         if (professor.isEmpty() || aluno.isEmpty() || disciplina.isEmpty() || turma.isEmpty()
                 || professor.equals("Nome do Professor") || aluno.equals("Nome do Aluno")
@@ -196,7 +201,13 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(this, "Não foi possível cadastrar. Verifique se professor e aluno existem.");
         }
-    }
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        Administrador adiministrador = new Administrador();
+        adiministrador.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
 
     private void carregarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
@@ -205,22 +216,6 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
             modelo.addRow(linha);
         }
     }
-
-    private void textFieldNomeProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNomeProfessorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldNomeProfessorActionPerformed
-
-    private void textFieldDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldDisciplinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldDisciplinaActionPerformed
-
-    private void textFieldNomeAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldNomeAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldNomeAlunoActionPerformed
-
-    private void textFieldTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldTurmaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldTurmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,7 +243,8 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonAdicionar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -257,9 +253,9 @@ public class AdicionarTurmaDisciplina extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private java.awt.TextField textFieldDisciplina;
-    private java.awt.TextField textFieldNomeAluno;
-    private java.awt.TextField textFieldNomeProfessor;
-    private java.awt.TextField textFieldTurma;
+    private javax.swing.JTextField jTextFieldDisciplina;
+    private javax.swing.JTextField jTextFieldNomeAluno;
+    private javax.swing.JTextField jTextFieldNomeProfessor;
+    private javax.swing.JTextField jTextFieldTurma;
     // End of variables declaration//GEN-END:variables
 }
